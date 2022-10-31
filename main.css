@@ -1,0 +1,56 @@
+*
+{
+    box-sizing:border-box;
+}
+body
+{
+    padding:0;
+    margin:0;
+    height: 100vh;
+    width:100vw;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.main_div
+{
+    width:636px;
+    height:705px;
+    border:2px solid steelblue;
+    display: flex;
+    flex-direction: column;
+}
+.canvas
+{
+    width:100%;
+    height:90%;
+}
+.controls
+{
+    width:100%;
+    height:10%;
+    background-color: steelblue;
+    display: flex;
+    align-items: center;
+    padding:0 10px;
+}
+
+button{
+    margin:5px;
+    width:50px;
+    height:50px;
+    font-size:2rem;
+    padding:2px;
+}
+.controls button:last-of-type
+{
+    /* align-self: flex-end; */
+    justify-self: flex-end;
+    margin-left: auto;
+}
+input
+{
+    width:40px;
+    height:40px;
+    border:none;
+}
