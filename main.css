@@ -43,6 +43,7 @@ button{
     font-size:2rem;
     padding:2px;
     background-color: white;
+    text-align:center;
     cursor:pointer;
 }
 .controls button:last-of-type
@@ -62,4 +63,10 @@ input
     border-radius: 30%;
     position: absolute;
     transition:0.2 linear;
+}
+.circleDraw
+{
+    border-radius:50%;
+    border:2px solid black;
+    background-color: transparent !important ;
 }

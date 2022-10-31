@@ -3,13 +3,41 @@ const increaseBtn = document.querySelector('.increase');
 const decreaseBtn = document.querySelector('.decrease');
 const sizetextBtn = document.querySelector('.sizetext');
 const colorBtn = document.querySelector('.color input');
+const squareBtn = document.querySelector('.square');
+const circleBtn = document.querySelector('.circle');
 const clearBtn =document.querySelector('.clear');
 
-let isPressed=false
+let isPressed=false;
+let squarePressed = false;
+let circlePressed = false;
 let size=5;
 let color='black';
 let beforwidth;
 let beforheight;
+
+function btnStateChanger(btn)
+{
+            if(btn===true)
+            {
+                btn=false;
+            }
+            else
+            {
+                btn=true;
+            }  
+            return btn;           
+            // const div = canvas.querySelector('div:last-of-type');
+            // div.className='draw';
+            // canvas.append(div);tn
+            // div.style.width = event.offsetX - beforwidth + 'px';
+            // div.style.height = event.offsetY - beforheight + 'px';
+            // div.style.left=event.offsetX + 'px';
+            // div.style.top=event.offsetY + 'px';
+            // div.style['background-color']=color;
+            // console.log(div);
+            // console.log(event.offsetX);
+}
+
 
 const decreaseBtnHandler = () =>
 {
@@ -41,9 +69,10 @@ canvas.addEventListener('mousedown',(event) =>
     if(event.target.classList.contains('canvas'))
     {
         const div = document.createElement('div');
-        isPressed=true;
+        // isPressed=true;
+        isPressed = btnStateChanger(isPressed);
         div.className='draw';
-        canvas.append(div);
+        event.target.append(div);
         div.style.left=event.offsetX + 'px';
         div.style.top=event.offsetY + 'px';
         beforwidth = event.offsetX;
@@ -54,42 +83,72 @@ canvas.addEventListener('mousedown',(event) =>
         // canvas.style.backgroundColor='red';
     }
 });
+
+
+
+
 canvas.addEventListener('mousemove',(event) =>
 {
     if(isPressed)
     {   
         if(event.target.classList.contains('canvas'))
         {
-        const div = document.createElement('div');
-        div.className='draw';
-        canvas.append(div);
-        div.style.width = size + 'px';
-        div.style.height = size + 'px';
-        div.style.left=event.offsetX + 'px';
-        div.style.top=event.offsetY + 'px';
-        div.style['background-color']=color;
-        // console.log(div);
-        // console.log(event.offsetX);
+            if(squarePressed===true && circlePressed==false)
+            {
+                circlePressed = circlePressed?btnStateChanger(circlePressed):circlePressed;
+                const div = canvas.querySelector('div:last-of-type');
+                div.style.width = event.offsetX - beforwidth + 'px';
+                div.style.height = event.offsetY - beforheight + 'px';
+            }
+            else if(circlePressed===true && squarePressed===false)
+            {
+                squarePressed = squarePressed?btnStateChanger(squarePressed):squarePressed;
+                const div = canvas.querySelector('div:last-of-type');
+                div.classList.add('circleDraw');
+                div.style.borderColor = color;
+                div.style.width = event.offsetX - beforwidth + 'px';
+                div.style.height = event.offsetY - beforheight + 'px';
+            }
+            else
+            {
+                const div = document.createElement('div');
+                div.className='draw';
+                event.target.append(div);
+                div.style.width = size + 'px';
+                div.style.height = size + 'px';
+                div.style.left=event.offsetX + 'px';
+                div.style.top=event.offsetY + 'px';
+                div.style['background-color']=color;
+                // console.log(div);
+                // console.log(event.offsetX);
+            }
+            
         }
     }
     // canvas.style.backgroundColor='red';
 });
-canvas.addEventListener('mouseup',() =>{
-    
-    isPressed=false;
-})
+
+
+
+
+
 decreaseBtnHandler();
+canvas.addEventListener('mouseup',() => {isPressed=btnStateChanger(isPressed);});
 increaseBtn.addEventListener('click',increaseBtnHandler);
 decreaseBtn.addEventListener('click',decreaseBtnHandler);
 clearBtn.addEventListener('click',() => canvas.innerHTML='');
 colorBtn.addEventListener('change',() => color=colorBtn.value);
+squareBtn.addEventListener('click',() =>{
+    circlePressed=false;
+    squarePressed = btnStateChanger(squarePressed)
+});
+circleBtn.addEventListener('click',() =>{
+    squarePressed=false;
+    circlePressed = btnStateChanger(circlePressed)
+});
+
 // canvas.addEventListener('mouseup',() =>
 // {
 //     canvas.style.backgroundColor='green';
 // });
 
-function squarewithOwal(){
-    const div = canvas.querySelector('div:last-of-type');
-    div.style.width = event.offsetX - beforwidth + 'px';
-    div.style.height = event.offsetY - beforheight + 'px';
-}
