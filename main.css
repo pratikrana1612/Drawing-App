@@ -19,6 +19,7 @@ body
     border:2px solid steelblue;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 .canvas
 {
@@ -41,6 +42,8 @@ button{
     height:50px;
     font-size:2rem;
     padding:2px;
+    background-color: white;
+    cursor:pointer;
 }
 .controls button:last-of-type
 {
@@ -53,4 +56,10 @@ input
     width:40px;
     height:40px;
     border:none;
+}
+.draw
+{
+    border-radius: 30%;
+    position: absolute;
+    transition:0.2 linear;
 }
