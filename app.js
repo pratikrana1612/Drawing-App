@@ -15,28 +15,7 @@ let color='black';
 let beforwidth;
 let beforheight;
 
-function btnStateChanger(btn)
-{
-            if(btn===true)
-            {
-                btn=false;
-            }
-            else
-            {
-                btn=true;
-            }  
-            return btn;           
-            // const div = canvas.querySelector('div:last-of-type');
-            // div.className='draw';
-            // canvas.append(div);tn
-            // div.style.width = event.offsetX - beforwidth + 'px';
-            // div.style.height = event.offsetY - beforheight + 'px';
-            // div.style.left=event.offsetX + 'px';
-            // div.style.top=event.offsetY + 'px';
-            // div.style['background-color']=color;
-            // console.log(div);
-            // console.log(event.offsetX);
-}
+const  btnStateChanger= (btn) => btn?false:true;          
 
 
 const decreaseBtnHandler = () =>
@@ -93,14 +72,14 @@ canvas.addEventListener('mousemove',(event) =>
     {   
         if(event.target.classList.contains('canvas'))
         {
-            if(squarePressed===true && circlePressed==false)
+            if(squarePressed && !circlePressed)
             {
                 circlePressed = circlePressed?btnStateChanger(circlePressed):circlePressed;
                 const div = canvas.querySelector('div:last-of-type');
                 div.style.width = event.offsetX - beforwidth + 'px';
                 div.style.height = event.offsetY - beforheight + 'px';
             }
-            else if(circlePressed===true && squarePressed===false)
+            else if(circlePressed && !squarePressed)
             {
                 squarePressed = squarePressed?btnStateChanger(squarePressed):squarePressed;
                 const div = canvas.querySelector('div:last-of-type');
@@ -133,7 +112,7 @@ canvas.addEventListener('mousemove',(event) =>
 
 
 decreaseBtnHandler();
-canvas.addEventListener('mouseup',() => {isPressed=btnStateChanger(isPressed);});
+canvas.addEventListener('mouseup',() => isPressed=btnStateChanger(isPressed));
 increaseBtn.addEventListener('click',increaseBtnHandler);
 decreaseBtn.addEventListener('click',decreaseBtnHandler);
 clearBtn.addEventListener('click',() => canvas.innerHTML='');
